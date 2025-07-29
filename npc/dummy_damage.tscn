@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://5f5urg6lpog"]
+
+[ext_resource type="Script" path="res://npc/dummy_damage.gd" id="1_p072l"]
+[ext_resource type="Texture2D" uid="uid://7o6pelc3sjhf" path="res://assets/Knight 2D Pixel Art/Sprites/with_outline/IDLE.png" id="2_0xbvs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6sgn"]
+atlas = ExtResource("2_0xbvs")
+region = Rect2(0, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt3ik"]
+atlas = ExtResource("2_0xbvs")
+region = Rect2(96, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m33gn"]
+atlas = ExtResource("2_0xbvs")
+region = Rect2(192, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riawf"]
+atlas = ExtResource("2_0xbvs")
+region = Rect2(288, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfeau"]
+atlas = ExtResource("2_0xbvs")
+region = Rect2(384, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq4n5"]
+atlas = ExtResource("2_0xbvs")
+region = Rect2(480, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0di1h"]
+atlas = ExtResource("2_0xbvs")
+region = Rect2(576, 0, 96, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_udd2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6sgn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt3ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m33gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_riawf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfeau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rq4n5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0di1h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p072l"]
+size = Vector2(29, 44)
+
+[node name="DummyDamage" type="CharacterBody2D"]
+position = Vector2(17, 14)
+script = ExtResource("1_p072l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 2)
+sprite_frames = SubResource("SpriteFrames_udd2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 3)
+shape = SubResource("RectangleShape2D_p072l")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 18.0
+offset_top = -31.0
+offset_right = 58.0
+offset_bottom = -8.0
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -47.0
+offset_top = -44.0
+offset_right = 48.0
+offset_bottom = -21.0
+text = "Training Bot"
+vertical_alignment = 1
