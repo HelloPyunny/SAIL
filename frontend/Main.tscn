@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtj4kc61xccxj"]
+[gd_scene load_steps=9 format=3 uid="uid://dtj4kc61xccxj"]
 
 [ext_resource type="PackedScene" uid="uid://bj53os3gihh3l" path="res://player/player.tscn" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://dxt1dg4qdmnx5" path="res://main.gd" id="1_r0du0"]
 [ext_resource type="PackedScene" uid="uid://ysl505ie1im2" path="res://npc/NPC.tscn" id="2_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://cajidukjnlimq" path="res://UI/DialogueBox.tscn" id="4_cm0pq"]
-[ext_resource type="PackedScene" uid="uid://5f5urg6lpog" path="res://npc/dummy_damage.tscn" id="5_fos0i"]
-[ext_resource type="PackedScene" uid="uid://ta76akefnj5m" path="res://player/archer.tscn" id="7_lgr22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0du0"]
 size = Vector2(2240, 16)
@@ -24,11 +22,11 @@ position = Vector2(24, 0)
 script = ExtResource("1_r0du0")
 
 [node name="Player" parent="." instance=ExtResource("1_glv2v")]
-position = Vector2(63, 224)
+position = Vector2(132, 312)
 
 [node name="Npc" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_uu6xs")]
 z_index = 10
-position = Vector2(40, 322)
+position = Vector2(102, 325)
 scale = Vector2(0.603, 0.6)
 player = NodePath("../Player")
 
@@ -39,28 +37,28 @@ player = NodePath("../Player")
 [node name="WallTop" type="StaticBody2D" parent="MapBounds"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallTop"]
-position = Vector2(560, 4)
+position = Vector2(568, 1)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_r0du0")
 
 [node name="WallBottom" type="StaticBody2D" parent="MapBounds"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallBottom"]
-position = Vector2(560, 636)
+position = Vector2(566, 640)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_cm0pq")
 
 [node name="WallLeft" type="StaticBody2D" parent="MapBounds"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallLeft"]
-position = Vector2(4, 320)
+position = Vector2(14, 325)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_fos0i")
 
 [node name="WallRight" type="StaticBody2D" parent="MapBounds"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallRight"]
-position = Vector2(1116, 320)
+position = Vector2(1130, 321)
 shape = SubResource("RectangleShape2D_3dxm6")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
@@ -73,10 +71,10 @@ offset_bottom = 40.0
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("4_cm0pq")]
 layout_mode = 1
-offset_left = 200.0
-offset_top = 488.0
-offset_right = 896.0
-offset_bottom = 576.0
+offset_left = 324.0
+offset_top = 401.0
+offset_right = 766.0
+offset_bottom = 548.72
 
 [node name="OpenButton" type="Button" parent="UI"]
 layout_mode = 1
@@ -85,26 +83,24 @@ anchor_left = 0.8
 anchor_top = 0.6
 anchor_right = 3.05
 anchor_bottom = 1.375
+offset_left = 29.0
+offset_top = 11.0
+offset_right = 29.0
+offset_bottom = 11.0
 text = "Open Chat"
-
-[node name="DummyDamage" parent="." instance=ExtResource("5_fos0i")]
-position = Vector2(489, 211)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthPanel" type="Panel" parent="CanvasLayer"]
-offset_left = 53.0
-offset_top = 81.0
-offset_right = 93.0
-offset_bottom = 121.0
+offset_left = 85.0
+offset_top = 76.0
+offset_right = 149.0
+offset_bottom = 103.0
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HealthPanel"]
 layout_mode = 0
 offset_left = 1.0
-offset_right = 39.0
-offset_bottom = 39.0
+offset_right = 66.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 value = 100.0
-
-[node name="ArcherPlayer" parent="." instance=ExtResource("7_lgr22")]
-position = Vector2(305, 201)

@@ -24,6 +24,11 @@ func _ready():
 func _input(event):
 	if not is_active_player:
 		return
+	
+	# 채팅창이 열려있으면 게임 입력 무시
+	if _is_chat_open():
+		return
+	
 	if event.is_action_pressed("interact") and can_swap:
 		get_node("/root/Main").swap_to(knight)
 	if event.is_action_pressed("e") and can_shoot_arrow:
@@ -34,6 +39,12 @@ func _physics_process(delta):
 	if not is_active_player:
 		return
 	if is_attacking:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
+	# 채팅창이 열려있으면 이동 불가
+	if _is_chat_open():
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -119,3 +130,14 @@ func shoot_arrow():
 	await get_tree().create_timer(e_atk_cd).timeout
 	can_shoot_arrow = true
 	print("Arrow shot! dir:", direction, " pos:", position)
+
+func _is_chat_open() -> bool:
+	"""채팅창이 열려있는지 확인"""
+	var dialogue_box = get_node_or_null("/root/Main/UI/DialogueBox")
+	if dialogue_box:
+		# is_open 변수가 있으면 그 값을 사용, 없으면 visible 상태로 판단
+		if "is_open" in dialogue_box:
+			return dialogue_box.is_open
+		else:
+			return dialogue_box.visible
+	return false

@@ -30,6 +30,11 @@ func _input(event):
 		return
 	if not is_active_player:
 		return
+	
+	# Ignore game input if the chat window is open
+	if _is_chat_open():
+		return
+	
 	if event.is_action_pressed("interact") and can_swap:
 		get_node("/root/Main").swap_to(archer)
 	if event is InputEventKey and event.pressed:
@@ -60,6 +65,12 @@ func _physics_process(delta):
 	if not is_active_player:
 		return
 	if is_attacking:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
+	# Movement disabled while the chat window is open
+	if _is_chat_open():
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -149,7 +160,7 @@ func _play_attack(anim_name: String):
 
 func take_damage(amount: int):
 	current_health -= amount
-	print("Player took ", amount, " damage. HP now: ", current_health)
+	#print("Player took ", amount, " damage. HP now: ", current_health)
 
 	if health_bar:
 		health_bar.value = current_health
@@ -181,3 +192,14 @@ func _flip_attack_hitboxes(facing_left: bool):
 			attack_area.position.x = abs(original_pos.x) * (-1 if facing_left else 1)
 		else:
 			print("Missing attack area: Attack_", key)
+
+func _is_chat_open() -> bool:
+	"""check if dialogue_box is opened"""
+	var dialogue_box = get_node_or_null("/root/Main/UI/DialogueBox")
+	if dialogue_box:
+		# if is_open use the value, if not == visible
+		if "is_open" in dialogue_box:
+			return dialogue_box.is_open
+		else:
+			return dialogue_box.visible
+	return false

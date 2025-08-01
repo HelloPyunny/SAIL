@@ -9,7 +9,7 @@ func _on_body_entered(body):
 	if body == shooter:
 		return
 	if body.name == "Player":
-		print("Player hit by fireball!")
+		#print("Player hit by fireball!")
 		if body.has_method("take_damage"):
 			body.take_damage(5)  
 		queue_free()

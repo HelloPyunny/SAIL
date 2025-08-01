@@ -1,0 +1,109 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# AI Generated Content
+static/generated_maps/
+static/generated_maps/*.png
+static/generated_maps/*.jpg
+static/generated_maps/*.jpeg
+static/generated_maps/maps_metadata.json
+static/generated_maps/recommendation_history.json
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary Files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Cache Files
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Backup files
+*.bak
+*.backup
+
+# AWS Credentials (just in case)
+.aws/
+credentials
+
+# Vector Database Files (if locally stored)
+vector_db/*.db
+vector_db/*.index
+
+# API Keys and Secrets
+secrets.json
+config_local.py 

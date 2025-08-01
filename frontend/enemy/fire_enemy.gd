@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal enemy_died()  # Signal emitted when an enemy is defeated
+
 @export var move_speed = 40
 @export var attack_range := 100.0
 @export var attack_cooldown := 2.0
@@ -10,7 +12,7 @@ var current_health := max_health
 
 @export var fireball_scene: PackedScene 
 @export var fire_interval := 2.0         # fire rate
-@export var fire_speed := 200.0          # fire speed
+@export var fire_speed := 150.0          # fire speed
 
 @onready var fire_timer := $Timer
 var player: CharacterBody2D = null
@@ -53,7 +55,7 @@ func fire_at_player():
 		var direction = (player.global_position - global_position).normalized()
 		if projectile.has_method("launch"):
 			projectile.launch(direction)
-		print("Fireball launched!")
+		#print("Fireball launched!")
 
 func _on_fire_timer_timeout():
 	if not player:
@@ -69,7 +71,7 @@ func _on_fire_timer_timeout():
 
 func take_damage(amount):
 	current_health -= amount
-	print("Enemy hit! Current HP:", current_health)
+	#print("Enemy hit! Current HP:", current_health)
 
 	var label = $DamageLabel
 	label.text = str(amount)
@@ -83,4 +85,6 @@ func take_damage(amount):
 	tween.tween_callback(Callable(label, "hide"))
 
 	if current_health <= 0:
+		print("enemy dided! sending signal")
+		emit_signal("enemy_died")
 		queue_free()
