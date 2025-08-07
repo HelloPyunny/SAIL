@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://desq4s25qnjue"]
+[gd_scene load_steps=31 format=3 uid="uid://desq4s25qnjue"]
 
 [ext_resource type="Script" uid="uid://r2uheo5itbfh" path="res://enemy/fire_enemy.gd" id="1_5b4tk"]
 [ext_resource type="PackedScene" uid="uid://bo2ubveh68idy" path="res://enemy/fireball.tscn" id="2_5ffvu"]
@@ -65,6 +65,38 @@ region = Rect2(1008, 1444, 144, 76)
 atlas = ExtResource("4_2oi0o")
 region = Rect2(1152, 1444, 144, 76)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ww542"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(0, 166, 144, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rjdj"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(144, 166, 144, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsvf2"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(288, 166, 144, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2rg4"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(432, 166, 144, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tk6l"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(576, 166, 144, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufi3y"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(720, 166, 144, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1oo3"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(864, 166, 144, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi4aq"]
+atlas = ExtResource("4_2oi0o")
+region = Rect2(1008, 166, 144, 83)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_5ffvu"]
 animations = [{
 "frames": [{
@@ -121,23 +153,54 @@ animations = [{
 "loop": true,
 "name": &"fire_attack",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ww542")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rjdj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsvf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2rg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tk6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufi3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1oo3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi4aq")
+}],
+"loop": true,
+"name": &"fire_walking",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2oi0o"]
-size = Vector2(35, 52)
+size = Vector2(29, 46)
 
 [sub_resource type="Theme" id="Theme_5ffvu"]
 
 [node name="FireEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_5b4tk")
 fireball_scene = ExtResource("2_5ffvu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5ffvu")
-animation = &"fire_attack"
+animation = &"fire_walking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-15, 1)
+position = Vector2(-15.5, -2)
 shape = SubResource("RectangleShape2D_2oi0o")
 
 [node name="Timer" type="Timer" parent="."]
