@@ -17,7 +17,7 @@ func _ready():
 	_update_fill_color()
 
 func set_health(new_hp: int):
-	print("bar is:", bar)  
+	#print("bar is:", bar)  
 	new_hp = clamp(new_hp, 0, max_health)
 	var old = current_health
 	current_health = new_hp
