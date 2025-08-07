@@ -3,27 +3,46 @@ extends CharacterBody2D
 @export var walk_speed : float = 60.0
 @export var run_speed : float = 100.0
 
-@onready var health_bar = get_tree().get_root().get_node("/root/Main/CanvasLayer/HealthPanel/HealthBar")
+@onready var health_panel: CanvasLayer = get_node_or_null("/root/Main/HealthPanel")
 @onready var archer = get_node("/root/Main/ArcherPlayer") 
+
 var direction := Vector2.ZERO
 var is_running := false
 var is_attacking := false
 var is_active_player := false
 var can_swap := false
 var animated_sprite: AnimatedSprite2D
+
 @export var max_health := 100
 var current_health := max_health
 var respawn_position := Vector2.ZERO
 
+# attack damage
+@export var q_atk_dmg = 10
+@export var w_atk_dmg = 15
+@export var e_atk_dmg = 20
+
+var attack_base_offsets: Dictionary = {}
+
 func _ready():
 	animated_sprite = $Player_animation
 	respawn_position = global_position
-	if health_bar:
-		print("Found health bar!")
+	health_panel = get_node_or_null("/root/Main/HealthPanel")
+	if health_panel:
+		health_panel.set_health(current_health)
 	else:
-		print("Health bar not found!")
+		print("health_panel not found; UI won't update.")
+		#swap interaction area
 	$InteractArea.body_entered.connect(_on_body_entered)
 	$InteractArea.body_exited.connect(_on_body_exited)
+	
+	# cache base attack area offsets
+	for key in ["Q", "W", "E"]:
+		var node = get_node_or_null("Attack_" + key)
+		if node:
+			attack_base_offsets[key] = node.position
+		else:
+			print("Missing attack area at startup: Attack_%s" % key)
 
 func _input(event):
 	if is_attacking:
@@ -114,9 +133,7 @@ func _update_animation():
 		animated_sprite.flip_h = true
 		_flip_attack_hitboxes(true)
 	
-@export var q_atk_dmg = 10
-@export var w_atk_dmg = 15
-@export var e_atk_dmg = 20
+
 func perform_attack(key: String):
 	var attack_area = get_node_or_null("Attack_" + key)
 	if not attack_area:
@@ -160,10 +177,12 @@ func _play_attack(anim_name: String):
 
 func take_damage(amount: int):
 	current_health -= amount
-	#print("Player took ", amount, " damage. HP now: ", current_health)
+	current_health = clamp(current_health, 0, max_health)
+	print("Player took ", amount, " damage. HP now: ", current_health)
 
-	if health_bar:
-		health_bar.value = current_health
+	# update health UI
+	if health_panel:
+		health_panel.set_health(current_health)
 
 	if current_health <= 0:
 		respawn()
@@ -173,8 +192,8 @@ func respawn():
 	print("Player has died. Respawning...")
 	global_position = respawn_position
 	current_health = max_health
-	if health_bar:
-		health_bar.value = current_health
+	if health_panel:
+		health_panel.set_health(current_health)
 
 func _on_body_entered(body):
 	if body.name == "ArcherPlayer":

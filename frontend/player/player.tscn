@@ -379,6 +379,7 @@ size = Vector2(24, 41)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
+collision_mask = 0
 script = ExtResource("1_onrkg")
 
 [node name="Player_animation" type="AnimatedSprite2D" parent="."]
@@ -399,12 +400,16 @@ limit_bottom = 640
 
 [node name="Attack_Q" type="Area2D" parent="."]
 position = Vector2(20, -9)
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Q"]
 shape = SubResource("RectangleShape2D_rgyib")
 
 [node name="Attack_W" type="Area2D" parent="."]
 position = Vector2(18, 3)
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_W"]
 position = Vector2(0, 1)
@@ -412,6 +417,8 @@ shape = SubResource("RectangleShape2D_hg6s5")
 
 [node name="Attack_E" type="Area2D" parent="."]
 position = Vector2(17, 17)
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_E"]
 position = Vector2(1, 0)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtj4kc61xccxj"]
+[gd_scene load_steps=10 format=3 uid="uid://dtj4kc61xccxj"]
 
 [ext_resource type="PackedScene" uid="uid://bj53os3gihh3l" path="res://player/player.tscn" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://dxt1dg4qdmnx5" path="res://main.gd" id="1_r0du0"]
 [ext_resource type="PackedScene" uid="uid://ysl505ie1im2" path="res://npc/NPC.tscn" id="2_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://cajidukjnlimq" path="res://UI/DialogueBox.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://ffol4h3ima34" path="res://UI/health_panel.tscn" id="5_fos0i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0du0"]
 size = Vector2(2240, 16)
@@ -20,6 +21,10 @@ size = Vector2(8, 640)
 [node name="Main" type="Node2D"]
 position = Vector2(24, 0)
 script = ExtResource("1_r0du0")
+
+[node name="HealthPanel" parent="." instance=ExtResource("5_fos0i")]
+offset = Vector2(20, 5)
+transform = Transform2D(0.5, 0, 0, 0.5, 20, 5)
 
 [node name="Player" parent="." instance=ExtResource("1_glv2v")]
 position = Vector2(132, 312)
@@ -88,19 +93,3 @@ offset_top = 11.0
 offset_right = 29.0
 offset_bottom = 11.0
 text = "Open Chat"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HealthPanel" type="Panel" parent="CanvasLayer"]
-offset_left = 85.0
-offset_top = 76.0
-offset_right = 149.0
-offset_bottom = 103.0
-
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HealthPanel"]
-layout_mode = 0
-offset_left = 1.0
-offset_right = 66.0
-offset_bottom = 27.0
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-value = 100.0
