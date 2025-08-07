@@ -28,11 +28,12 @@ transform = Transform2D(0.5, 0, 0, 0.5, 20, 5)
 
 [node name="Player" parent="." instance=ExtResource("1_glv2v")]
 position = Vector2(132, 312)
+scale = Vector2(1.5, 1.5)
 
 [node name="Npc" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_uu6xs")]
 z_index = 10
 position = Vector2(102, 325)
-scale = Vector2(0.603, 0.6)
+scale = Vector2(1, 0.995)
 player = NodePath("../Player")
 
 [node name="MapRoot" type="Node2D" parent="."]

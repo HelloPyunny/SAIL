@@ -366,21 +366,24 @@ animations = [{
 size = Vector2(20, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
-size = Vector2(23, 10)
+size = Vector2(36.5, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hg6s5"]
-size = Vector2(20, 10)
+size = Vector2(33, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
-size = Vector2(20, 9)
+size = Vector2(27, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ieo8"]
-size = Vector2(24, 41)
+size = Vector2(36, 55)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
 collision_mask = 0
 script = ExtResource("1_onrkg")
+q_atk_dmg = 15
+w_atk_dmg = 20
+e_atk_dmg = 25
 
 [node name="Player_animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_n7ghd")
@@ -404,6 +407,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Q"]
+position = Vector2(6.75, -1.5)
 shape = SubResource("RectangleShape2D_rgyib")
 
 [node name="Attack_W" type="Area2D" parent="."]
@@ -412,7 +416,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_W"]
-position = Vector2(0, 1)
+position = Vector2(6.5, 1)
 shape = SubResource("RectangleShape2D_hg6s5")
 
 [node name="Attack_E" type="Area2D" parent="."]
@@ -421,12 +425,12 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_E"]
-position = Vector2(1, 0)
+position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_8t03j")
 
 [node name="InteractArea" type="Area2D" parent="."]
 position = Vector2(15, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
-position = Vector2(-15, 4.5)
+position = Vector2(-9, -2.5)
 shape = SubResource("RectangleShape2D_2ieo8")
