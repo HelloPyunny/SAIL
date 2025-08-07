@@ -41,8 +41,8 @@ func _ready():
 		var node = get_node_or_null("Attack_" + key)
 		if node:
 			attack_base_offsets[key] = node.position
-		else:
-			print("Missing attack area at startup: Attack_%s" % key)
+		#else:
+			#print("Missing attack area at startup: Attack_%s" % key)
 
 func _input(event):
 	if is_attacking:
@@ -153,13 +153,13 @@ func perform_attack(key: String):
 			dmg = 0
 
 
-	print("Attack ", key , " triggered with ", dmg, " damage")
+	#print("Attack ", key , " triggered with ", dmg, " damage")
 
 	var bodies = attack_area.get_overlapping_bodies()
-	print("Found %d bodies in Attack_%s" % [bodies.size(), key])
+	#print("Found %d bodies in Attack_%s" % [bodies.size(), key])
 
 	for body in bodies:
-		print("Hit body:", body.name)
+		#print("Hit body:", body.name)
 		if body == self:
 			continue
 		if body.has_method("take_damage"):
@@ -178,7 +178,7 @@ func _play_attack(anim_name: String):
 func take_damage(amount: int):
 	current_health -= amount
 	current_health = clamp(current_health, 0, max_health)
-	print("Player took ", amount, " damage. HP now: ", current_health)
+	#print("Player took ", amount, " damage. HP now: ", current_health)
 
 	# update health UI
 	if health_panel:
