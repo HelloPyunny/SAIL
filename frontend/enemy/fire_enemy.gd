@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal enemy_died
+
 @export var move_speed := 40.0
 
 # instead of a single attack_range, expose a range:
@@ -107,4 +109,5 @@ func take_damage(amount):
 		tween.tween_callback(Callable(label, "hide"))
 
 	if current_health <= 0:
+		emit_signal("enemy_died")
 		queue_free()
