@@ -143,7 +143,7 @@ func _on_chat_response_received(npc_response: String, stage_progress: Dictionary
 	
 	# Check for stage completion
 	if stage_progress.get("stage_completed", false):
-		add_message("Stage complete! Click the 'Next Stage' button.")
+		add_message("Stage complete! Close the chat and enter the Portal.")
 		_show_next_stage_button()
 	
 	# Check for game completion
