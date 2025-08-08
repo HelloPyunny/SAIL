@@ -6,7 +6,7 @@ A dynamic, AI-powered adventure game that creates personalized experiences based
 
 ## 🎮 Overview
 
-SAIL (Personalized Adventure Game) is an 8-stage interactive adventure that adapts to each player's personality, preferences, and background. The game uses AI to generate dynamic NPC responses, personalized map recommendations, and creates unique storylines for every player.
+This Game is an 8-stage interactive adventure that adapts to each player's personality, preferences, and background. The game uses AI to generate dynamic NPC responses, personalized map recommendations, and creates unique storylines for every player.
 
 ### Key Features
 
@@ -226,7 +226,7 @@ For issues and questions:
 ## 🎮 Game Controls
 
 - **WASD**: Movement
-- **F**: Interact with NPCs
+- **Chat Box**: Interact with NPCs
 - **Mouse**: UI interaction
 - **Shift**: Run (if implemented)
 
