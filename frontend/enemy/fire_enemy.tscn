@@ -193,6 +193,7 @@ size = Vector2(29, 46)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_5b4tk")
+max_health = 1
 fireball_scene = ExtResource("2_5ffvu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
