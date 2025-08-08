@@ -372,7 +372,7 @@ size = Vector2(36.5, 13)
 size = Vector2(33, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
-size = Vector2(27, 9)
+size = Vector2(33, 24.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ieo8"]
 size = Vector2(36, 55)
@@ -395,11 +395,13 @@ position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+enabled = false
 zoom = Vector2(0.5, 0.5)
 limit_left = 0
 limit_top = 0
-limit_right = 1204
-limit_bottom = 640
+limit_right = 1554
+limit_bottom = 1554
 
 [node name="Attack_Q" type="Area2D" parent="."]
 position = Vector2(20, -9)
@@ -425,7 +427,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_E"]
-position = Vector2(4.5, 0)
+position = Vector2(7.5, -7.75)
 shape = SubResource("RectangleShape2D_8t03j")
 
 [node name="InteractArea" type="Area2D" parent="."]
