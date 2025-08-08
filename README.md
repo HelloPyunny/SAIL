@@ -112,9 +112,9 @@ This Game is an 8-stage interactive adventure that adapts to each player's perso
 - AI-generated map recommendations
 - NPC interactions based on collected information
 
-### 5. Stage 8 - Final Boss
+### 5. Stage 8 - Final Stage
 - Culminating battle using all collected player information
-- Personalized boss encounter and resolution
+- A stage where the player takes one step closer to achieving their life goal.
 
 ## 🔧 API Endpoints
 
