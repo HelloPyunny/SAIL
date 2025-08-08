@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var cam : Camera2D = $Camera2D
 @onready var map_root = $MapRoot
 @onready var player = $Player 
 #@onready var archer = $ArcherPlayer
@@ -7,6 +8,7 @@ extends Node2D
 @onready var open_button = $UI/OpenButton
 @onready var dialogue_box = $UI/DialogueBox
 @onready var http_request = $HTTPRequest
+@onready var map_sprite = $MapRoot/MapSprite
 
 var current_player: CharacterBody2D = null
 var game_api: GameAPI
@@ -16,6 +18,7 @@ var map_http_request: HTTPRequest = null  # For map image download
 var pending_map_data: Dictionary = {}  # Map information being downloaded
 
 func _ready():
+
 	print("Main._ready() started")
 	
 	print("Initializing UI elements...")
@@ -28,7 +31,7 @@ func _ready():
 	current_player = player
 	current_player.is_active_player = true
 	#archer.is_active_player = false
-	print("Palyer set")
+	print("Player set")
 	
 	# Initialize GameAPI 
 	print("Initializing GameAPI...")
@@ -333,6 +336,19 @@ func load_stage(path: String):
 			portal.deactivate_portal()
 			
 	await get_tree().process_frame  # Wait for map to load
+	var stage = map_root.get_child(0) as Node2D
+	if instance.has_node("TileMap"):
+		# any scene with a TileMap (like Stage1) gets camera‐fitting
+		_fit_camera_to_map(instance)
+	elif instance.has_node("Background"):
+		# any scene with a Background sprite (like Stage2–7) gets bg‐fitting
+		var bg = instance.get_node("Background") as Sprite2D
+		bg.texture = game_api.current_map_image  # or whatever your downloaded Texture is
+		_fit_background_to_view(bg)
+	else:
+		push_warning("load_stage: scene has neither TileMap nor Background!")
+	#_fit_camera_to_map(instance)
+	#_scale_stage_to_view(instance)
 	
 	# Set player position
 	var start = instance.get_node_or_null("StartPosition")
@@ -359,6 +375,93 @@ func load_stage(path: String):
 		print("enemy Spawned ", enemy_manager.enemies_per_stage, " enemies")
 	
 	print("✅ Stage loaded: ", path)
+	
+func _fit_background_to_view(bg:Sprite2D) -> void:
+	var view_px = get_viewport_rect().size               # e.g. (634,360)
+	var tex_size = bg.texture.get_size()                 # e.g. (1024,1024)
+	# pick the larger scale so it covers both width AND height
+	var scale_factor = max(view_px.x / tex_size.x,
+						   view_px.y / tex_size.y)
+	bg.scale = Vector2.ONE * scale_factor
+	# center the sprite on screen; assumes bg’s center is at (0,0)
+	bg.global_position = view_px * 0.5
+	
+func _fit_camera_to_map(stage: Node2D) -> void:
+	# grab the TileMap
+	var tm = stage.get_node_or_null("TileMap") as TileMap
+	if not tm:
+		push_warning("No TileMap found to fit camera to!")
+		return
+
+	# 1) used rect in tile-coords (Vector2i)
+	var used : Rect2i = tm.get_used_rect()
+	# 2) convert integer tile coords to float Vector2
+	var used_pos = Vector2(used.position.x, used.position.y)
+	var used_sz  = Vector2(used.size.x,     used.size.y)
+	# 3) tile size (Vector2i → Vector2)
+	var tile_sz_i = tm.tile_set.tile_size
+	var tile_px   = Vector2(tile_sz_i.x, tile_sz_i.y)
+
+	# 4) map size in pixels
+	var map_px = used_sz * tile_px
+
+	# 5) viewport size
+	var view_px = get_viewport_rect().size
+
+	# 6) zoom so the entire map fits (contain)
+	var zoom_f = min(view_px.x / map_px.x,
+					 view_px.y / map_px.y)
+	$Camera2D.zoom = Vector2.ONE * zoom_f
+
+	# 7) center the camera on the map’s pixel-center
+	var center_tc = used_pos + used_sz * 0.5          # now all Vector2
+	var center_px = tm.global_position + center_tc * tile_px
+	$Camera2D.global_position = center_px
+
+	# 8) update camera limits so you can’t pan outside the map
+	$Camera2D.limit_left   = int(center_px.x - map_px.x * 0.5)
+	$Camera2D.limit_top    = int(center_px.y - map_px.y * 0.5)
+	$Camera2D.limit_right  = int(center_px.x + map_px.x * 0.5)
+	$Camera2D.limit_bottom = int(center_px.y + map_px.y * 0.5)
+
+
+func _scale_stage_to_view(stage: Node2D) -> void:
+	print("--- scaling stage:", stage.name, "---")
+
+	# 1) find the TileMap
+	var tm = stage.get_node_or_null("TileMap") as TileMap
+	print("  got tm =", tm)
+	if not tm:
+		push_warning("No TileMap found under " + stage.name)
+		return
+
+	# 2) measure used rectangle (in tiles)
+	var used : Rect2i = tm.get_used_rect()
+	print("  used_rect =", used)
+	print("  used.size =", used.size)
+
+	# 3) tile size (convert Vector2i → Vector2)
+	var ts_i = tm.tile_set.tile_size
+	var tile_px = Vector2(ts_i.x, ts_i.y)
+	print("  tile_px =", tile_px)
+
+	# 4) compute map dimensions in pixels
+	var map_px = Vector2(used.size.x, used.size.y) * tile_px
+	print("  map_px =", map_px)
+
+	# 5) viewport size
+	var view_px = get_viewport_rect().size
+	print("  view_px =", view_px)
+
+	# 6) choose the scale factor so the map fills the screen
+	var scale_factor = max(view_px.x / map_px.x,
+						   view_px.y / map_px.y)
+	print("  scale_factor =", scale_factor)
+
+	# 7) apply it
+	stage.scale = Vector2.ONE * scale_factor
+	print("  stage.scale set to", stage.scale)
+
 
 func _on_portal_triggered(next_path: String):
 	print("Portal triggered! Advancing to next stage...")

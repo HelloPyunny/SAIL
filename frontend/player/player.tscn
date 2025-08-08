@@ -394,13 +394,6 @@ frame_progress = 0.950577
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_onrkg")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
-limit_left = 0
-limit_top = 0
-limit_right = 1204
-limit_bottom = 640
-
 [node name="Attack_Q" type="Area2D" parent="."]
 position = Vector2(20, -9)
 collision_layer = 2

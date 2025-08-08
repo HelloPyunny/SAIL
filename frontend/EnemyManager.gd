@@ -5,7 +5,7 @@ class_name EnemyManager
 signal all_enemies_defeated()
 
 @export var enemy_scene: PackedScene
-@export var enemies_per_stage: int = 5
+@export var enemies_per_stage: int = 1
 @export var spawn_radius: float = 300.0
 
 var enemies: Array[Node] = []
