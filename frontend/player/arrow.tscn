@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf0oo7vy7nymi"]
+
+[ext_resource type="Script" uid="uid://vi8rptmcx4fu" path="res://player/arrow.gd" id="1_6ha8w"]
+[ext_resource type="Texture2D" uid="uid://dbv6tkw87y58y" path="res://assets/GandalfHardcore Archer/arrow.png" id="1_buulu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ha8w"]
+size = Vector2(32, 4)
+
+[node name="Arrow" type="Area2D"]
+script = ExtResource("1_6ha8w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_buulu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6ha8w")
+
+[node name="Timer" type="Timer" parent="."]

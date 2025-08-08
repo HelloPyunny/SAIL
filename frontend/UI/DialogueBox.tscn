@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://cajidukjnlimq"]
+
+[ext_resource type="Script" uid="uid://du2oo3embkmab" path="res://UI/dialogue_box.gd" id="1_nkpxt"]
+
+[node name="DialogueBox" type="Control"]
+z_index = 1
+layout_mode = 3
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.007
+offset_left = 384.0
+offset_top = -104.0
+offset_right = -366.0
+offset_bottom = -23.5601
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_nkpxt")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.007
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_right = -8.06409
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+z_index = 1
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainerTop" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainerTop"]
+layout_mode = 2
+text = "Close Chat"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Messages" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainerBot" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InputBox" type="LineEdit" parent="PanelContainer/VBoxContainer/HBoxContainerBot"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SendButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainerBot"]
+layout_mode = 2
+text = "send
+"
+icon_alignment = 2
+vertical_icon_alignment = 2

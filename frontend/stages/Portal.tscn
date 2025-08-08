@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://jpop4nr10bvy"]
+
+[ext_resource type="Texture2D" uid="uid://gp6o5t12ub2e" path="res://assets/2D Isometric Portal/Sprite-sheet/Isometric_Portal.png" id="1_gve13"]
+[ext_resource type="Script" uid="uid://uyv8740u8g2g" path="res://stages/portal.gd" id="1_x61tf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x61tf"]
+size = Vector2(39.462, 10.1766)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x61tf"]
+atlas = ExtResource("1_gve13")
+region = Rect2(0, 0, 112, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61uqg"]
+atlas = ExtResource("1_gve13")
+region = Rect2(112, 0, 112, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ysvq"]
+atlas = ExtResource("1_gve13")
+region = Rect2(224, 0, 112, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jag6x"]
+atlas = ExtResource("1_gve13")
+region = Rect2(336, 0, 112, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf638"]
+atlas = ExtResource("1_gve13")
+region = Rect2(448, 0, 112, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvk23"]
+atlas = ExtResource("1_gve13")
+region = Rect2(560, 0, 112, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y81wr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x61tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61uqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ysvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jag6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf638")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvk23")
+}],
+"loop": true,
+"name": &"Portal",
+"speed": 5.0
+}]
+
+[node name="Portal" type="Area2D"]
+scale = Vector2(-1.01363, 1)
+collision_layer = 2
+script = ExtResource("1_x61tf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 5
+z_as_relative = false
+position = Vector2(0, 1)
+scale = Vector2(0.5, 3.341)
+shape = SubResource("RectangleShape2D_x61tf")
+
+[node name="Portal" type="AnimatedSprite2D" parent="."]
+z_index = 10
+rotation = -6.28319
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_y81wr")
+animation = &"Portal"
+frame_progress = 0.433919

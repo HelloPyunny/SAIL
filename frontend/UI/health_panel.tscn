@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://ffol4h3ima34"]
+
+[ext_resource type="Script" uid="uid://3loe1gn5jfqx" path="res://UI/health_panel.gd" id="1_x1xxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay8fd"]
+bg_color = Color(0.121569, 0.164706, 0.207843, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_detail = 6
+
+[sub_resource type="Theme" id="Theme_ay8fd"]
+
+[sub_resource type="FontFile" id="FontFile_lmij8"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+cache/0/19/0/ascent = 0.0
+cache/0/19/0/descent = 0.0
+cache/0/19/0/underline_position = 0.0
+cache/0/19/0/underline_thickness = 0.0
+cache/0/19/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/21/0/ascent = 0.0
+cache/0/21/0/descent = 0.0
+cache/0/21/0/underline_position = 0.0
+cache/0/21/0/underline_thickness = 0.0
+cache/0/21/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_elgu8"]
+font = SubResource("FontFile_lmij8")
+font_size = 20
+
+[node name="HealthPanel" type="CanvasLayer"]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+script = ExtResource("1_x1xxx")
+
+[node name="Background" type="Panel" parent="."]
+custom_minimum_size = Vector2(220, 28)
+offset_left = 18.5
+offset_top = 22.0
+offset_right = 238.5
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay8fd")
+
+[node name="Fill" type="TextureProgressBar" parent="Background"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 220.0
+offset_bottom = 43.0
+theme = SubResource("Theme_ay8fd")
+tint_under = Color(0.164706, 0.184314, 0.219608, 1)
+tint_over = Color(0.298039, 0.686275, 0.313726, 1)
+
+[node name="HealthLabel" type="Label" parent="Background"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 0
+offset_left = 76.0
+offset_top = 5.0
+offset_right = 149.0
+offset_bottom = 33.0
+text = "100/100"
+label_settings = SubResource("LabelSettings_elgu8")
+
+[node name="Flash" type="ColorRect" parent="Background"]
+visible = false
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 218.0
+offset_bottom = 38.0
+color = Color(1, 0, 0, 1)

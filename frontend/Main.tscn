@@ -1,0 +1,133 @@
+[gd_scene load_steps=10 format=3 uid="uid://dtj4kc61xccxj"]
+
+[ext_resource type="PackedScene" uid="uid://bj53os3gihh3l" path="res://player/player.tscn" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://dxt1dg4qdmnx5" path="res://main.gd" id="1_r0du0"]
+[ext_resource type="PackedScene" uid="uid://ysl505ie1im2" path="res://npc/NPC.tscn" id="2_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://cajidukjnlimq" path="res://UI/DialogueBox.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://ffol4h3ima34" path="res://UI/health_panel.tscn" id="5_fos0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0du0"]
+size = Vector2(3098, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm0pq"]
+size = Vector2(3126, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fos0i"]
+size = Vector2(16, 3102)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dxm6"]
+size = Vector2(9, 1538)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_r0du0")
+
+[node name="HealthPanel" parent="." instance=ExtResource("5_fos0i")]
+offset = Vector2(20, 5)
+scale = Vector2(1, 1)
+transform = Transform2D(1, 0, 0, 1, 20, 5)
+
+[node name="Player" parent="." instance=ExtResource("1_glv2v")]
+position = Vector2(132, 312)
+scale = Vector2(1.5, 1.5)
+
+[node name="Npc" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_uu6xs")]
+z_index = 10
+position = Vector2(102, 325)
+scale = Vector2(1, 0.995)
+player = NodePath("../Player")
+
+[node name="MapRoot" type="Node2D" parent="."]
+
+[node name="MapBounds" type="Node2D" parent="."]
+
+[node name="WallTop" type="StaticBody2D" parent="MapBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallTop"]
+z_index = 1
+position = Vector2(782.5, 3)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_r0du0")
+
+[node name="WallBottom" type="StaticBody2D" parent="MapBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallBottom"]
+z_index = 1
+position = Vector2(790.5, 1547)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_cm0pq")
+
+[node name="WallLeft" type="StaticBody2D" parent="MapBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallLeft"]
+z_index = 1
+position = Vector2(8, 776.5)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_fos0i")
+
+[node name="WallRight" type="StaticBody2D" parent="MapBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/WallRight"]
+z_index = 1
+position = Vector2(1554, 769)
+shape = SubResource("RectangleShape2D_3dxm6")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogueBox" parent="UI" instance=ExtResource("4_cm0pq")]
+layout_mode = 1
+anchor_left = 1.875
+anchor_top = 10.33
+anchor_right = 24.275
+anchor_bottom = 24.25
+offset_left = 11.0
+offset_top = 163.8
+offset_right = -9.0
+offset_bottom = 1.99994
+grow_vertical = 2
+
+[node name="OpenButton" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 11.0
+anchor_top = 0.6
+anchor_right = 13.25
+anchor_bottom = 1.375
+offset_left = 30.0
+offset_top = 11.0
+offset_right = 30.0
+offset_bottom = 11.0
+text = "Open Chat"
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 820.0
+offset_top = 35.0
+offset_right = 998.0
+offset_bottom = 191.0
+
+[node name="Label" type="Label" parent="Control/Panel"]
+layout_mode = 0
+offset_right = 173.0
+offset_bottom = 153.0
+text = "Game Guide
+----------------------
+Attack: Q/W/E
+Move: Arrow Keys
+Run: Shift + Move
+Player auto respawns
+"
+horizontal_alignment = 1
