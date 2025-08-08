@@ -3,7 +3,7 @@
 [node name="Stage8" type="Node2D"]
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(100, 320)
+position = Vector2(130, 490)
 
 [node name="NpcStartPosition" type="Marker2D" parent="."]
-position = Vector2(41, 320)
+position = Vector2(70, 490)
