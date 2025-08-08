@@ -52,16 +52,16 @@ font = SubResource("FontFile_lmij8")
 font_size = 20
 
 [node name="HealthPanel" type="CanvasLayer"]
-scale = Vector2(0.5, 0.5)
-transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 script = ExtResource("1_x1xxx")
 
 [node name="Background" type="Panel" parent="."]
 custom_minimum_size = Vector2(220, 28)
-offset_left = 120.0
-offset_top = 122.0
-offset_right = 340.0
-offset_bottom = 164.0
+offset_left = 18.5
+offset_top = 22.0
+offset_right = 238.5
+offset_bottom = 64.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ay8fd")
 
 [node name="Fill" type="TextureProgressBar" parent="Background"]
