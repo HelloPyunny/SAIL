@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var walk_speed : float = 60.0
-@export var run_speed : float = 100.0
+@export var walk_speed : float = 70.0
+@export var run_speed : float = 120.0
 
 @onready var health_panel: CanvasLayer = get_node_or_null("/root/Main/HealthPanel")
 @onready var archer = get_node("/root/Main/ArcherPlayer") 
