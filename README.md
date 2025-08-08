@@ -1,6 +1,6 @@
-# SAIL (Summer of AI Lab) Project - Personalized Adventure Game
+# SAIL (Summer of AI Lab) Project
 
-## Team Black Hawk
+## Personalized Adventure Game - Team Black Hawk
 
 A dynamic, AI-powered adventure game that creates personalized experiences based on player interactions. Built with FastAPI backend and Godot Game Engine.
 
