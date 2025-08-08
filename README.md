@@ -200,22 +200,6 @@ All sensitive configuration is managed through environment variables:
 - Database credentials
 - Server configuration
 
-### Debug Mode
-For development without external services:
-```env
-GAME_DEBUG_MODE=true
-```
-
-## 🚀 Deployment
-
-### Production Considerations
-- Secure CORS settings
-- Implement authentication
-- Add rate limiting
-- Enhanced error handling
-- Monitoring and logging
-- Environment-specific configurations
-
 ## 🆘 Support
 
 For issues and questions:
@@ -225,10 +209,10 @@ For issues and questions:
 
 ## 🎮 Game Controls
 
-- **WASD**: Movement
-- **Chat Box**: Interact with NPCs
-- **Mouse**: UI interaction
-- **Shift**: Run (if implemented)
+- **Arrow Keys**: Movement
+- **Chat Box**: Interact with NPCs, Press Enter
+- **Shift + Arrow Keys**: Run
+- **Attack**: Q, W, E
 
 ---
 
