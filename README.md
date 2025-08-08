@@ -1,4 +1,4 @@
-# SAIL (Summer of AI Lab Project) - Personalized Adventure Game
+# SAIL (Summer of AI Lab) Project - Personalized Adventure Game
 
 ## Team Black Hawk
 
