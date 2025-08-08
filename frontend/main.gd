@@ -14,9 +14,15 @@ var enemy_manager: EnemyManager
 var current_map_background: Sprite2D = null  # Downloaded background map
 var map_http_request: HTTPRequest = null  # For map image download
 var pending_map_data: Dictionary = {}  # Map information being downloaded
+const BACKGROUND_SCALE_MULTIPLIER := 1.3  # >1.0 to enlarge beyond fit-to-screen ### ADJUST MAP SIZE
+const BACKGROUND_MIN_SCALE := 1.0  # Do not downscale below original image size
 
 func _ready():
 	print("Main._ready() started")
+	# Print initial window size
+	_print_window_size()
+	# Track window resize
+	get_viewport().size_changed.connect(_on_window_resized)
 	
 	print("Initializing UI elements...")
 	open_button.show()
@@ -46,6 +52,13 @@ func _ready():
 	print("Stage loading...")
 	load_stage("res://stages/stage1_tutorial/Stage1.tscn")
 	print("Tutorial stage loaded – using fixed map")
+func _on_window_resized():
+	_print_window_size()
+
+func _print_window_size():
+	var viewport_size := get_viewport().get_visible_rect().size
+	var window_size := DisplayServer.window_get_size()
+	print("Viewport=", viewport_size, "  Window=", window_size)
 
 func _initialize_game_api():
 	"""Initializing GameAPI and creating new game"""
@@ -263,9 +276,9 @@ func _apply_map_background(texture: ImageTexture):
 	current_map_background = Sprite2D.new()
 	current_map_background.texture = texture
 	current_map_background.z_index = -100  # Send to back
-	
-	# Center alignment
-	current_map_background.position = Vector2(640, 360)  # Center of screen
+	# Place background with top-left at (0, 0)
+	current_map_background.centered = false
+	current_map_background.position = Vector2.ZERO
 	
 	# Resize to fit the screen
 	var screen_size = get_viewport().get_visible_rect().size
@@ -280,13 +293,14 @@ func _apply_map_background(texture: ImageTexture):
 		return
 	
 	var scale_factor = max(screen_size.x / texture_size.x, screen_size.y / texture_size.y)
-	current_map_background.scale = Vector2(scale_factor, scale_factor)
+	var final_scale = max(scale_factor * BACKGROUND_SCALE_MULTIPLIER, BACKGROUND_MIN_SCALE)
+	current_map_background.scale = Vector2(final_scale, final_scale)
 	
 	# Add to map root (place behind everything)
 	map_root.add_child(current_map_background)
 	map_root.move_child(current_map_background, 0)  # Move to first child (send to back)
 	
-	print("Background map applied - Screen size: ", screen_size, ", Texture size: ", texture_size, ", Scale: ", scale_factor)
+	print("Background map applied - Screen size: ", screen_size, ", Texture size: ", texture_size, ", Scale: ", final_scale)
 
 # Removed old fixed map download function - now using real-time generated maps
 	
@@ -338,6 +352,8 @@ func load_stage(path: String):
 	var start = instance.get_node_or_null("StartPosition")
 	if start:
 		player.global_position = start.global_position
+		# Update respawn position to match map StartPosition
+		player.respawn_position = start.global_position
 	else:
 		print("No StartPosition node found in map!")
 		
